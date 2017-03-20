@@ -1,0 +1,9 @@
+## important ignores here
+
+## random ignores here
+
+*.pyc
+
+# ignore weird cache files
+
+*~
