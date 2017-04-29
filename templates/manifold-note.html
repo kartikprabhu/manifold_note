@@ -4,46 +4,66 @@
 
 <time class="dt-published" datetime="{{ note['published'][0] }}">{{ note['published'][0] }}</time>
 
-{% if note['edited'] %}{% for dt in note['edited'] %}<ol>
+{% if note['edited'] %}<ol>
+{% for dt in note['edited'] %}
  <li><time class="dt-edited" datetime="{{ dt }}" >{{ dt }}</time></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['in-reply-to'] %}{% for link in note['in-reply-to'] %}In reply to:<ol>
+{% if note['in-reply-to'] %}In reply to:<ol>
+{% for link in note['in-reply-to'] %}
 	<li><a class="u-in-reply-to" href="{{ link }}">{{ link }}</a></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['repost-of'] %}{% for link in note['repost-of'] %}Repost of:<ol>
+{% if note['repost-of'] %}Repost of:<ol>
+{% for link in note['repost-of'] %}
 	<li><a class="u-repost-of" href="{{ link }}">{{ link }}</a></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['like-of'] %}{% for link in note['like-of'] %}Like-of:<ol>
+{% if note['like-of'] %}Like-of:<ol>
+{% for link in note['like-of'] %}
 	<li><a class="u-like-of" href="{{ link }}">{{ link }}</a></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['bookmark-of'] %}{% for link in note['bookmark-of'] %}Bookmark-of:<ol>
+{% if note['bookmark-of'] %}Bookmark-of:<ol>
+{% for link in note['bookmark-of'] %}
 	<li><a class="u-bookmark-of" href="{{ link }}">{{ link }}</a></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
 <div class="p-name p-content">{{ note['content'][0] }}</div>
 
-{% if note['photo'] %}{% for link in note['photo'] %}Photos:<ol>
+{% if note['photo'] %}Photos:<ol>
+{% for link in note['photo'] %}
 	<li><img class="u-photo" src="{{ link }}" /></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['audio'] %}{% for link in note['audio'] %}Audios:<ol>
+{% if note['audio'] %}Audios:<ol>
+{% for link in note['audio'] %}
 	<li><audio class="u-audio" src="{{ link }}" /></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['video'] %}{% for link in note['video'] %}Videos:<ol>
+{% if note['video'] %}Videos:<ol>
+{% for link in note['video'] %}
 	<li><video class="u-video" src="{{ link }}" /></li>
-</ol>{% endfor %}{% endif %}
+{% endfor %}
+</ol>{% endif %}
 
-{% if note['syndication'] %}{% for link in note['syndication'] %}Syndicated-to:<ul>
+{% if note['syndication'] %}Syndicated-to:<ul>
+{% for link in note['syndication'] %}
 	<li><a class="u-syndication" href="{{ link }}">{{ link }}</a></li>
-</ul>{% endfor %}{% endif %}
+{% endfor %}
+</ul>{% endif %}
 
-{% if note['category'] %}{% for category in note['category'] %}Categories:<ul>
+{% if note['category'] %}Categories:<ul>
+{% for category in note['category'] %}
 	<li class="p-category">{{ category }}</li>
-</ul>{% endfor %}{% endif %}
+{% endfor %}
+</ul>{% endif %}
 
 </article>
