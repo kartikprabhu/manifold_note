@@ -30,7 +30,7 @@
 	<li><img class="u-photo" src="{{ link }}" /></li>
 </ol>{% endfor %}{% endif %}
 
-{% if note['audio'] %}{% for link in note['audio'] %}Auidos:<ol>
+{% if note['audio'] %}{% for link in note['audio'] %}Audios:<ol>
 	<li><audio class="u-audio" src="{{ link }}" /></li>
 </ol>{% endfor %}{% endif %}
 
@@ -38,8 +38,12 @@
 	<li><video class="u-video" src="{{ link }}" /></li>
 </ol>{% endfor %}{% endif %}
 
-{% if note['syndication'] %}{% for link in note['syndication'] %}Syndicated-to:<ol>
+{% if note['syndication'] %}{% for link in note['syndication'] %}Syndicated-to:<ul>
 	<li><a class="u-syndication" href="{{ link }}">{{ link }}</a></li>
-</ol>{% endfor %}{% endif %}
+</ul>{% endfor %}{% endif %}
+
+{% if note['category'] %}{% for category in note['category'] %}Categories:<ul>
+	<li class="p-category">{{ category }}</li>
+</ul>{% endfor %}{% endif %}
 
 </article>
