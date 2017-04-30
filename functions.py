@@ -136,7 +136,16 @@ def delete(storage, uid):
 
 	# find file. raise error if does not exist
 
-	# delete file? or just flag?
+	# flag file as deleted
 
 	# return status of delete
+	return None
+
+def undelete(storage, uid):
+
+	# find file. raise error if does not exist
+
+	# unflag the deleted file?
+
+	# return status of undelete
 	return None
