@@ -23,5 +23,6 @@ setup(
     author_email='me@kartikprabhu.com',
     url='https://github.com/kartikprabhu/manifold_note',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+	package_data={'': ['templates/*']},
 )
