@@ -18,7 +18,8 @@ def _ensure_dir(f):
 def _render(note, charset='utf-8'):
 
 	# load from FileSystem directory
-	loader = jinja2.FileSystemLoader('templates')
+	#loader = jinja2.FileSystemLoader('templates')
+	loader = jinja2.PackageLoader('manifold_note', 'templates')
 
 	# create environment and set to strip code blocks
 	env = jinja2.Environment(loader=loader, trim_blocks=True, lstrip_blocks=True, extensions=[jinja2.ext.with_])
