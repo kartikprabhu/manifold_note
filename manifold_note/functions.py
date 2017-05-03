@@ -103,7 +103,7 @@ def update(storage, data):
 
 	old_data = None
 
-	with codecs.open(jsonpath, 'r', 'utf-8') as f:
+	with codecs.open(json_path, 'r', 'utf-8') as f:
 		old_data = json.load(f)
 
 	# don't allow uid change through update
