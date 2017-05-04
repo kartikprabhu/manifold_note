@@ -9,6 +9,7 @@ import jinja2.ext
 import filters
 
 SUBDIR = 'notes'
+DELFLAG = '[deleted]'
 
 def _ensure_dir(f):
 	d = os.path.dirname(f)
@@ -28,7 +29,7 @@ def _render(note, charset='utf-8'):
 	env.filters['dtformat'] = filters.dtformat
 
 	# render template and return
-	return env.get_template('manifold-note.html').render(note=note)
+	return env.get_template('manifold-note.html').render(note=note, charset=charset)
 
 def create(storage, data):
 
@@ -53,13 +54,13 @@ def create(storage, data):
 	# make sure the directories exist
 	_ensure_dir(html_path)
 
-	# create HTML file
+	# create HTML file with properties
 	with codecs.open(html_path, 'w', 'utf-8') as f:
 		f.write(_render(data['properties']))
 
 	json_path = os.path.join(dir_path, uid+'.json')
 
-	# create JSON file for data
+	# create JSON file for all of the data
 	with codecs.open(json_path, 'w', 'utf-8') as f:
 		json.dump(data, f, ensure_ascii=False)
 
@@ -72,14 +73,16 @@ def read(storage, uid):
 	dir_path = os.path.join(storage, SUBDIR, uid)
 	json_path = os.path.join(dir_path, uid+'.json')
 
-	# if JSON exists read from JSON
+	# if JSON does not exist return error
 	if not os.path.exists(json_path):
 		return {'code': 404, 'message': 'File not found'}
 
+	# if JSON exists read from JSON
 	with codecs.open(json_path, 'r', 'utf-8') as f:
 		data = json.load(f)
 
-	return {'code': 200, 'message': 'File read', 'data': data}
+	# return the data properties
+	return {'code': 200, 'message': 'File read', 'data': data['properties']}
 
 def update(storage, data):
 
@@ -111,18 +114,23 @@ def update(storage, data):
 		return {'code': 400, 'message': 'uid of data does not match uid of file'}
 
 	# create temp file to write json data
-	with tempfile.NamedTemporaryFile(delete=False, dir=dir_path) as temp_f:
+	fd, tmp_path = tempfile.mkstemp(dir=dir_path)
+	with codecs.open(tmp_path, 'w', 'utf-8') as temp_f:
 		json.dump(data, temp_f, ensure_ascii=False)
 		# replace original json file
 		os.rename(temp_f.name, json_path)
 
+	os.close(fd)
+
 	html_path = os.path.join(dir_path, uid+'.html')
 
 	# create temp file to write html data
-	with tempfile.NamedTemporaryFile(delete=False, dir=dir_path) as temp_f:
-		temp_f.write(_render(data['properties']).encode('utf-8'))
-		# replace original file
+	fd, tmp_path = tempfile.mkstemp(dir=dir_path)
+	with codecs.open(tmp_path, 'w', 'utf-8') as temp_f:
+		temp_f.write(_render(data['properties']))
 		os.rename(temp_f.name, html_path)
+
+	os.close(fd)
 
 	return {'code': 200, 'message': 'File updated'}
 
