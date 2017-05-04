@@ -33,7 +33,7 @@ def _render(note, charset='utf-8'):
 
 def create(storage, data):
 
-	# get uid and use as file name
+	# get first uid and use as file name
 	try:
 		uid = data['properties']['uid'][0]
 		uid = uid.strip()
@@ -81,8 +81,8 @@ def read(storage, uid):
 	with codecs.open(json_path, 'r', 'utf-8') as f:
 		data = json.load(f)
 
-	# return the data properties
-	return {'code': 200, 'message': 'File read', 'data': data['properties']}
+	# return the data
+	return {'code': 200, 'message': 'File read', 'data': data}
 
 def update(storage, data):
 

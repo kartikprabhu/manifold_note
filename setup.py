@@ -15,7 +15,7 @@ with open('LICENSE') as f:
 
 setup(
     name='manifold_note',
-    version='0.1.0',
+    version='0.1.1',
     description='A CRUD system to add store notes in a file-storage',
     long_description=readme,
     install_requires=required,
